@@ -377,13 +377,18 @@
       
         
           
-            <p> 命令行运行：<br>1.在终端输入<br>（1）<strong>kotlinc hello.kt -include-runtime -d hello.jar</strong><br>（2）<strong>java -jar hello.jar</strong><br>  hello.kt:编译的文件名<br>  -include-runtime:运行hello.kt的代码<br> -d hello.jar:打包成jar文件</p>
-<p>2.交互式kotlin shell<br>  直接在里面输入代码然后立即执行<br> 在运行cmd那 输入<strong>kotlinc-jvm</strong></p>
-<p>3.kotlin脚本（以<strong>.kts</strong>扩展名结尾）<br>例：hello.kts<br><code>code:</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">println(&quot;hello world&quot;);</div><div class="line"> var name=&quot;huang&quot;;</div><div class="line"> println(&quot;hello &quot;+ name);</div></pre></td></tr></table></figure>
-<p>执行：<strong>kotlinc -script hello.kts</strong></p>
-
-          
+           命令行运行：1.在终端输入（1）kotlinc hello.kt -include-runtime -d hello.jar（2）java -jar hello.jar  hello.kt:编译的文件名  -include-runtime:运行hello.kt的代码 -d hello.jar:打包成jar文件
+2.交互式kotlin shell  直接在里面输入代码然后立即执行 在运行cmd那 输入kotlinc-jvm
+3.kotlin脚本（以.kts扩展名结尾）例：hello.ktscode:
+123println(&quot;hello world&quot;); var name=&
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/18/my-firsr-blog/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -531,14 +536,21 @@
       
         
           
-            <p>​       在Android studio中,File–&gt;Settings–&gt;Plugins安装插件 时，碰到了插件找不到的问题：<img src="android1.PNG" alt=""></p>
-<p>​       <strong>我的解决办法:</strong></p>
-<p>​       <font color="red" size="12px">把Http Proxy关掉，就可以了！！！</font></p>
-<p>​       <img src="./images/http.png"></p>
-<p>​        <img src="images/geny.PNG" alt=""></p>
-<p>​      如果还是不行的，你就只能到相关官方去下载相应的jar包，在导入了。</p>
+          ​       在Android studio中,File–&gt;Settings–&gt;Plugins安装插件 时，碰到了插件找不到的问题：
+​       我的解决办法:
+​       把Http Proxy关掉，就可以了！！！
+​       
+​        
+​      如果还是不行的，你就只能到相关官方去下载相应的jar包，在导入了。
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/20/android1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -686,89 +698,46 @@
       
         
           
-            <p>​                                             jsp中的内置对象</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">1</th>
-<th style="text-align:center"><strong>pageContext</strong></th>
-<th style="text-align:center">javax.servlet.jsp.PageContext</th>
-<th style="text-align:center">页面容器</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center"><strong>request</strong></td>
-<td style="text-align:center">javax.servlet.http.HttpServletRequest</td>
-<td style="text-align:center">获取用户的请求</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center"><strong><em>response</em></strong></td>
-<td style="text-align:center">javax.servlet.http.HttpServletResponse</td>
-<td style="text-align:center">服务器向客户端的回应信息</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center"><strong>session</strong></td>
-<td style="text-align:center">javax.servlet.http.HttpSession</td>
-<td style="text-align:center">保存每个用户的信息</td>
-</tr>
-<tr>
-<td style="text-align:center">5</td>
-<td style="text-align:center"><strong>application</strong></td>
-<td style="text-align:center">javax.servlet.ServletContext</td>
-<td style="text-align:center">所有用户的共享信息</td>
-</tr>
-<tr>
-<td style="text-align:center">6</td>
-<td style="text-align:center">config</td>
-<td style="text-align:center">javax.servlet.ServletConfig</td>
-<td style="text-align:center">服务器配置</td>
-</tr>
-<tr>
-<td style="text-align:center">7</td>
-<td style="text-align:center">out</td>
-<td style="text-align:center">javax.servlet.jsp.JspWriter</td>
-<td style="text-align:center">页面输出</td>
-</tr>
-<tr>
-<td style="text-align:center">8</td>
-<td style="text-align:center">page</td>
-<td style="text-align:center">java.lang.Object</td>
-<td style="text-align:center">从该页面表示出来的一个servlet实例</td>
-</tr>
-<tr>
-<td style="text-align:center">9</td>
-<td style="text-align:center">exception</td>
-<td style="text-align:center">java.lang.Throwable</td>
-<td style="text-align:center">发生异常，错误页中起作用</td>
-</tr>
-</tbody>
-</table>
-<p>​    </p>
-<hr>
-<h4 id="4种属性范围"><a href="#4种属性范围" class="headerlink" title="4种属性范围"></a>4种属性范围</h4><p>​    <strong><em>page</em></strong>:只在一个页面中保存属性，跳转之后无效。</p>
-<p>​     <code>&lt;%  pageContext.setAttribute(&quot;name&quot;,&quot;studyhuang&quot;);</code>   </p>
-<p><code>pageContext.setAttribute(&quot;date&quot;,new   Date());   %&gt;</code>   </p>
-<p><code>&lt;%  String username=(String)pageContext.getAttribute(&quot;name&quot;);</code></p>
-<p><code>Date date=(Date)pageContext.getAttribute(&quot;date&quot;); %&gt;</code> </p>
-<p><code>&lt;h2&gt;用户名：&lt;%=username%&gt;&lt;/h2&gt;</code></p>
-<p><code>&lt;h2&gt;日期：&lt;%=date%&gt;&lt;/h2&gt;</code></p>
-<p>   <strong>request</strong>:只在请求中保存，服务器跳转后依然无效。</p>
-<p>   <code>&lt;%@ page import=&quot;javax.servlet.http.HttpServletRequest&quot;%&gt;</code></p>
-<p>  `  &lt;%  //设置属性在本页面，跳转后没办法获得</p>
-<pre><code>     request.setAttribute(&quot;name&quot;,&quot;studyhuang&quot;);
-     request.setAttribute(&quot;req&quot;,&quot;在服务器的跳转中起作用&quot;);
-%&gt;`
-</code></pre><p>   <strong>session</strong>:在一次会话范围中，可以使用，新开浏览器失效。</p>
-<p>  不管客户端还是服务器只要设置了属性都可以获得。</p>
-<p>   <strong>application</strong>:在整个服务器上保存，所有用户可用。</p>
-<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><p>​        </p>
-<p>​     </p>
+          ​                                             jsp中的内置对象
 
-          
+
+
+1
+pageContext
+javax.servlet.jsp.PageContext
+页面容器
+
+
+
+
+2
+request
+javax.servlet.http.HttpServletRequest
+获取用户的请求
+
+
+3
+response
+javax.servlet.http.HttpServletResponse
+服务器向客户端的回应信息
+
+
+4
+session
+javax.servlet.http.HttpSession
+保存每个用户的信息
+
+
+5
+applicatio
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/13/1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -894,19 +863,26 @@
       
         
           
-            <p>   背景：搭建博客已经有一段时间了，肚子里没墨，搭好就没怎么用了，暑假空闲时间一多，想着辛苦搭建的，得利用起来，发现忘了，so。。</p>
-<p> 1.创建文章</p>
-<p>(1)<code>hexo new ”文章标题“</code></p>
-<p>(2)hexo new page “文件名”</p>
-<p>2.找到SOURCE/_POSTS的文件夹下刚创建的文件，并用markdown编辑器打开文件，然后你就可以自由写 文章了</p>
-<p>3.写好文章后，部署到github</p>
-<p>   (1)    先清除缓存</p>
-<p><code>hexo clean</code></p>
-<p>(2)部署</p>
-<p> <code>hexo g -d</code></p>
-<p>4.刚开始还不咋会用markdown，见谅，写给健忘的自己。</p>
+             背景：搭建博客已经有一段时间了，肚子里没墨，搭好就没怎么用了，暑假空闲时间一多，想着辛苦搭建的，得利用起来，发现忘了，so。。
+ 1.创建文章
+(1)hexo new ”文章标题“
+(2)hexo new page “文件名”
+2.找到SOURCE/_POSTS的文件夹下刚创建的文件，并用markdown编辑器打开文件，然后你就可以自由写 文章了
+3.写好文章后，部署到github
+   (1)    先清除缓存
+hexo clean
+(2)部署
+ hexo g -d
+4.刚开始还不咋会用markdown，见谅，写给健忘的自己。
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/11/1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1054,24 +1030,21 @@
       
         
           
-            <ol>
-<li><p>​    可以应用多个class到一个元素，只需要在多个class之间用空格分开即可。</p>
-<p>   eg:<img class="class1 class2"></p>
-<p>2.css中的圆角边框:<code>border-radius:5px;</code></p>
-<p>​                圆形边框:<code>border-radius:50%;</code>用百分比边框半径为50%</p>
-<p>3.添加字体 :<code>font-family:Lobster;</code>   google酷炫字体</p>
-<p>  <code>&lt;link href=&quot;https://fonts.gdgdocs.org/css?family=Lobster&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;</code></p>
-<p> 4.Nesting（嵌套）就是把一个元素放在另一个元素里面。<br> <a><img src="#"></a></p>
-</li>
-</ol>
-<p>5.占位符(placeholder text)是用户在input(输入)框输入任何东西之前放置在input(输入)框中的<strong>预定义*文本</strong>。</p>
-<p>  <code>&lt;input type=&quot;text&quot; placeholder=&quot;text&quot;/&gt;</code></p>
-<ol>
-<li><p>required:用户不填写输入框就无法提交到表单</p>
-<input type="text" required></li>
-</ol>
-
           
+​    可以应用多个class到一个元素，只需要在多个class之间用空格分开即可。
+   eg:
+2.css中的圆角边框:border-radius:5px;
+​                圆形边框:border-radius:50%;用百分比边框半径为50%
+3.添加字体 :font-family:Lobster;   google酷炫字体
+  &lt;link href=&quot;https://fonts.gdgdocs.org/css?family=Lobster&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&qu
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/27/1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
