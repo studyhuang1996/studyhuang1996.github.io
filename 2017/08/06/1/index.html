@@ -1,0 +1,949 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('����������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="1," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1.在java网络编程中，我们通常会学习TCP和UDP（没错就是计算机网络学的）   TCP: 传输控制协议（英语：Transmission Control Protocol，缩写为 TCP） ​      一种面向连接的、可靠的、基于字节流的传输层通信协议。通过三次握手来校验  UDP:用户数据包协议（英语：User Datagram Protocol，缩写为UDP），又称用户数据报文协议，是一">
+<meta name="keywords" content="1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java网络编程">
+<meta property="og:url" content="http://yoursite.com/2017/08/06/1/index.html">
+<meta property="og:site_name" content="welcome to studyhuang">
+<meta property="og:description" content="1.在java网络编程中，我们通常会学习TCP和UDP（没错就是计算机网络学的）   TCP: 传输控制协议（英语：Transmission Control Protocol，缩写为 TCP） ​      一种面向连接的、可靠的、基于字节流的传输层通信协议。通过三次握手来校验  UDP:用户数据包协议（英语：User Datagram Protocol，缩写为UDP），又称用户数据报文协议，是一">
+<meta property="og:updated_time" content="2017-08-06T16:08:31.995Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java网络编程">
+<meta name="twitter:description" content="1.在java网络编程中，我们通常会学习TCP和UDP（没错就是计算机网络学的）   TCP: 传输控制协议（英语：Transmission Control Protocol，缩写为 TCP） ​      一种面向连接的、可靠的、基于字节流的传输层通信协议。通过三次握手来校验  UDP:用户数据包协议（英语：User Datagram Protocol，缩写为UDP），又称用户数据报文协议，是一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/06/1/"/>
+
+
+
+
+
+  <title>java网络编程 | welcome to studyhuang</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">welcome to studyhuang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/06/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="studyhuang1996">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="welcome to studyhuang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java网络编程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-06T22:35:00+08:00">
+                2017-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/06/1/" class="leancloud_visitors" data-flag-title="java网络编程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1.在java网络编程中，我们通常会学习TCP和UDP（没错就是计算机网络学的）</p>
+<p>  <strong>TCP:</strong> 传输控制协议（英语：Transmission Control Protocol，缩写为 TCP）</p>
+<p>​      一种<strong>面向连接</strong>的、<strong>可靠</strong>的、基于字节流的传输层通信协议。通过<a href="http://baike.sogou.com/v7720717.htm?fromTitle=%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B" target="_blank" rel="external">三次握手</a>来校验</p>
+<p> <strong>UDP:</strong>用户数据包协议（英语：User Datagram Protocol，缩写为UDP），又称用户数据报文协议，是一个简单的面向数据报的传输层协议。<strong>面向无连接</strong>，UDP只提供数据的不可靠传递，它一旦把应用程序发给网络层的数据发送出去，就不保留数据备份（所以UDP有时候也被认为是不可靠的数据报协议）。</p>
+<p><strong><em><font color="red">有了如此安全可靠的TCP,为何还要UDP??</font></em></strong></p>
+<pre><code>(1)TCP的可靠是有代价的，每次通过三次握手原理对数据内容的正确性的验证会占用计算机的处理时间和网络带宽，效率相对比较低。
+</code></pre><p>​    (2)UDP的传输比较快，效率比较高，有些应用不需要这么可靠的，选择udp更好。</p>
+<p>2.UDP的操作过程</p>
+<p>   1.创建DatagramSocket udp服务</p>
+<pre><code> 1.创建DatagramSocket udp服务
+* 2.提供数据，把数据封装成数据包DatagramPacket
+     DatagramPacket(byte[] buf, int offset, int length, InetAddress address, int port) 
+    数据报包，用来将长度为 length 偏移量为 offset 的包发送到指定主机上的指定端口号。
+* 3.，通过socket服务发送数据，将数据包发出去
+* 4.关闭资源
+</code></pre><p>  案列1 <strong>发送一段文字数据用UDP</strong></p>
+<p>   <strong>发送端</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">DatagramSocket  datagramSocket=new DatagramSocket();</div><div class="line"> byte[] buf=&quot; UDP SEND &quot;.getBytes();</div><div class="line"> DatagramPacket data=</div><div class="line"> new DatagramPacket(buf,buf.length,InetAddress.getByName(&quot;192.168.1.9&quot;),9997);</div><div class="line"> //发送</div><div class="line"> datagramSocket.send(data);</div><div class="line">//关闭资源</div><div class="line"> datagramSocket.close();</div></pre></td></tr></table></figure>
+<p>​            <em>DatagramSocket:此类表示用来发送和接收数据报包的套接字。</em></p>
+<p>​        DatagramPacket:此类表示数据报包,数据报包用来实现无连接包投递服务,不对包投递做出保证.</p>
+<p>​        <em>send(DatagramPacket p) :  从此套接字发送数据报包。</em></p>
+<p>  <strong>接收端</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"> //1.udp服务</div><div class="line"> DatagramSocket ds=new DatagramSocket(9997);</div><div class="line"> //2.创建一个接收数据的</div><div class="line"> while(true)&#123;</div><div class="line"> byte[] buf=new byte[1024];</div><div class="line"> DatagramPacket data=new DatagramPacket(buf, buf.length);</div><div class="line"></div><div class="line">ds.receive(data);</div><div class="line"></div><div class="line">String ip=data.getAddress().toString();</div><div class="line">int port=data.getPort();</div><div class="line">String content=new String(data.getData(),0,data.getLength());</div><div class="line">System.out.println(&quot;ip:&quot;+ip+&quot; port:&quot;+port+&quot; data:&quot; +content);</div></pre></td></tr></table></figure>
+<p><strong>3.udp多线程实现聊天</strong></p>
+<pre><code>发送端
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">public class ChatSend implements Runnable&#123;</div><div class="line"></div><div class="line">	private DatagramSocket ds;</div><div class="line">	public ChatSend(DatagramSocket ds)</div><div class="line">	&#123;</div><div class="line">		this.ds=ds;</div><div class="line">	&#125;</div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">	//从键盘输入</div><div class="line">	  BufferedReader br=new BufferedReader(new InputStreamReader(System.in));</div><div class="line">	  String line=null;</div><div class="line">	  </div><div class="line">	  try &#123;</div><div class="line">		while((line=br.readLine())!=null)&#123;</div><div class="line">		   		  </div><div class="line">			byte[] buf=line.getBytes();  </div><div class="line">			DatagramPacket dp=</div><div class="line">					new DatagramPacket(buf, 		                                 buf.length,InetAddress.getByName(&quot;192.168.1.255&quot;),9999);</div><div class="line">			ds.send(dp);</div><div class="line">		  &#125;</div><div class="line">	&#125; catch (UnknownHostException e) &#123;</div><div class="line">		</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; catch (IOException e) &#123;</div><div class="line">	</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">	  ds.close();	</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​     接收端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public class ChatRece implements Runnable&#123;</div><div class="line"></div><div class="line">	private DatagramSocket ds;</div><div class="line">	public ChatRece(DatagramSocket ds)&#123;</div><div class="line">		this.ds=ds;</div><div class="line">	&#125;</div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		</div><div class="line">		while(true)&#123;</div><div class="line">			</div><div class="line">			try &#123;</div><div class="line">				</div><div class="line">					byte[] buf=new byte[1024];</div><div class="line">					DatagramPacket dp=new DatagramPacket(buf, buf.length);</div><div class="line">					ds.receive(dp);</div><div class="line">					String ip=dp.getAddress().toString();</div><div class="line">					String data=new String(dp.getData(),0,dp.getLength());</div><div class="line">					System.out.println(ip+&quot;:&quot;+data);</div><div class="line">			</div><div class="line">			&#125; catch (Exception e) &#123;</div><div class="line">				</div><div class="line">	             throw new  RuntimeException(&quot;接收端失败&quot;);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>​    main方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DatagramSocket send=new DatagramSocket();</div><div class="line">DatagramSocket rece=new DatagramSocket(9999);</div><div class="line">new Thread(new ChatSend(send)).start();</div><div class="line">new Thread(new ChatRece(rece)).start();</div></pre></td></tr></table></figure>
+<p><strong><em>4.TCP的操作步骤</em></strong></p>
+<p>​    (1).<strong>Socket</strong> :  此类实现客户端套接字（也可以就叫“套接字”）。套接字是两台机器间通信的端点。</p>
+<p>​         <strong>ServerSocket</strong>:此类实现服务器套接字。服务器套接字等待请求通过网络传入。它基于该请求执行某些操                    作，然后可能向请求者返回结果</p>
+<p>​    (2).建立客户端（scoket）和服务器端（serversocket）</p>
+<p>​     (3).建立连接后。通过中的io流进行数据传输</p>
+<p>​    (4).关闭socket</p>
+<p>​    <strong>案例1:客户端和服务器互访</strong></p>
+<p>​        客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Socket s=new Socket(&quot;localhost&quot;,10002);</div><div class="line">//向服务器写入数据</div><div class="line">OutputStream os=s.getOutputStream();</div><div class="line">os.write(&quot;服务器你好&quot;.getBytes());</div><div class="line"></div><div class="line">//读取服务器的反馈数据</div><div class="line">InputStream  is=s.getInputStream();</div><div class="line">byte [] buf=new byte[1024];</div><div class="line">int len=is.read(buf);</div><div class="line">System.out.println( new String(buf,0,len));</div><div class="line">s.close();</div></pre></td></tr></table></figure>
+<p>​    服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">ServerSocket server=new ServerSocket(10002);</div><div class="line">Socket ss=	server.accept();</div><div class="line">System.out.println(ss.getInetAddress().getHostAddress());</div><div class="line">InputStream is=ss.getInputStream();//读取客户端数据</div><div class="line">byte[] buf=new byte[1024];</div><div class="line">int len=is.read(buf);</div><div class="line">System.out.println(new String(buf,0,len));</div><div class="line"></div><div class="line">OutputStream os=ss.getOutputStream();//向客户端填写反馈信息</div><div class="line">os.write(&quot;大家好！---server&quot;.getBytes());</div><div class="line">ss.close();</div></pre></td></tr></table></figure>
+<p><strong>案列2:多线程实现图片上传</strong></p>
+<p>​              客户端:</p>
+<pre><code>Socket socket= new Socket(&quot;localhost&quot;,11110);
+ BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+    File file =new File(br.readLine());
+
+    if (!((file.exists())&amp;&amp;file.isFile())) {
+        System.out.println(&quot;图片不存在，文件有问题&quot;);
+        return;
+    }
+    FileInputStream fis=new FileInputStream(file);
+
+    OutputStream os=socket.getOutputStream();
+
+    //3.把客户端的数据发送给服务端
+    int num=0;
+    byte[] bufin=new byte[1024];
+    while((num=fis.read(bufin))!=-1){
+        os.write(bufin,0,num);
+    }
+    socket.shutdownOutput();
+    //4.读取服务端的反馈信息
+    InputStream in=socket.getInputStream();
+    byte[] buf=new byte[1024];
+    int len=in.read(buf);    
+    System.out.println(new String(buf,0,len));        
+
+    fis.close();
+   socket.close();
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//服务器</div><div class="line">public class PicServer &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) throws Exception &#123;</div><div class="line">		ServerSocket server=new ServerSocket(11110);</div><div class="line">		 Socket s=server.accept();</div><div class="line">		new Thread(new PicThread(s)).start();</div><div class="line">		server.close();</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">public class PicThread implements Runnable &#123;</div><div class="line">	private Socket socket;</div><div class="line">	public PicThread(Socket socket)</div><div class="line">	&#123;</div><div class="line">		this.socket=socket;</div><div class="line">	&#125;</div><div class="line">	public void run() &#123;</div><div class="line">		int count=1;</div><div class="line">		try &#123;</div><div class="line">			String ip=socket.getInetAddress().getHostAddress();</div><div class="line">			System.out.println(ip);</div><div class="line">			InputStream is=socket.getInputStream();</div><div class="line">		    </div><div class="line">			File file=new File(ip+&quot;(&quot;+count+&quot;)&quot;+&quot;.jpg&quot;);</div><div class="line">			while(file.exists())</div><div class="line">				file=new File(ip+&quot;(&quot;+(count++)+&quot;).jpg&quot;);</div><div class="line">			FileOutputStream fos=new FileOutputStream(file);</div><div class="line">			int len=0;</div><div class="line">			byte[] buf=new byte[1024];</div><div class="line">			   while((len=is.read(buf))!=-1)&#123;</div><div class="line">				   fos.write(buf,0,len);</div><div class="line">			   &#125;</div><div class="line">//			PrintWriter pw =new PrintWriter(socket.getOutputStream(),true); </div><div class="line">			  OutputStream pw=socket.getOutputStream();</div><div class="line">			pw.write(&quot;上传图片成功&quot;.getBytes());</div><div class="line">			socket.close();</div><div class="line">			fos.close();	</div><div class="line">		&#125; catch (IOException e) &#123;</div><div class="line">			// TODO Auto-generated catch block</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p><strong>5.URL（Uniform Resource Locator）统一资源定位符</strong></p>
+<pre><code>5.1创建URL对象，并通过调用openConnection方法获得URLConnection对象；
+</code></pre><p>​        5.2设置URLConnection参数和普通请求属性；<br>​    5.3向远程资源发送请求；<br>​    5.4远程资源变为可用，程序可以访问远程资源的头字段和通过输入流来读取远程资源返回的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">String  path=&quot;http://localhost:8080/WEB01/index.html&quot;;</div><div class="line">URL url=new  URL(path);</div><div class="line">URLConnection conn =url.openConnection();</div><div class="line">System.out.println(conn.toString());</div><div class="line"></div><div class="line">InputStream is =conn.getInputStream();</div><div class="line">int len=0;</div><div class="line">byte[] buf =new byte[1024];</div><div class="line">len=is.read(buf);</div><div class="line"></div><div class="line">System.out.println(new String(buf,0,len));</div></pre></td></tr></table></figure>
+<p>  今天主要学习了TCP,UDP(传输层),URL(应用)的主要用法。</p>
+
+      
+    </div>
+   
+    <div>
+      
+          <!-- JS�� sweetalert ���޸�·�� --><!--
+
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>���ı���:</span><a href="/2017/08/06/1/">java网络编程</a></p>
+  <p><span>��������:</span><a href="/" title="���� studyhuang1996 �ĸ��˲���">studyhuang1996</a></p>
+  <p><span>����ʱ��:</span>2017��08��06�� - 22:08</p>
+  <p><span>��������:</span>2017��08��07�� - 00:08</p>
+  <p><span>ԭʼ����:</span><a href="/2017/08/06/1/" title="java网络编程">http://yoursite.com/2017/08/06/1/</a>
+    <span class="copy-path"  title="����������������"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2017/08/06/1/"  aria-label="���Ƴɹ���"></i></span>
+  </p>
+  <p><span>����Э��:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">����-����ҵ��ʹ��-��ֹ���� 4.0 ����</a> ת���뱣��ԭ�����Ӽ����ߡ�</p>  
+</div>-->
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '���Ƴɹ�',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+
+      
+    </div>
+
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/1/" rel="tag"># 1</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/01/1/" rel="next" title="Python学习笔记（一）">
+                <i class="fa fa-chevron-left"></i> Python学习笔记（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/12/1/" rel="prev" title="Python学习笔记（二）">
+                Python学习笔记（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo.jpg"
+               alt="studyhuang1996" />
+          <p class="site-author-name" itemprop="name">studyhuang1996</p>
+           
+              <p class="site-description motion-element" itemprop="description">没故事的女同学</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">studyhuang1996</span>
+</div>
+
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("A98KoG9KM3z6PLcYUC4Wahs4-gzGzoHsz", "usBzz6AXb6uWJhmowq8gDUPD");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
