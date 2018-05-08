@@ -1,0 +1,932 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('����������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="spring boot redis mybatis," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="redis在spring boot中的使用总结 在pom.xml中引入redis依赖  1234  &amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;spring-boot-starter-data-redis&amp;lt;/artifactId&amp;gt;&amp;lt;/dep">
+<meta name="keywords" content="spring boot redis mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis mybatis在spring boot中的使用">
+<meta property="og:url" content="http://yoursite.com/2018/05/08/1/index.html">
+<meta property="og:site_name" content="welcome to studyhuang">
+<meta property="og:description" content="redis在spring boot中的使用总结 在pom.xml中引入redis依赖  1234  &amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;spring-boot-starter-data-redis&amp;lt;/artifactId&amp;gt;&amp;lt;/dep">
+<meta property="og:updated_time" content="2018-05-08T06:40:53.434Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redis mybatis在spring boot中的使用">
+<meta name="twitter:description" content="redis在spring boot中的使用总结 在pom.xml中引入redis依赖  1234  &amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;spring-boot-starter-data-redis&amp;lt;/artifactId&amp;gt;&amp;lt;/dep">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/08/1/"/>
+
+
+
+
+
+  <title>redis mybatis在spring boot中的使用 | welcome to studyhuang</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">welcome to studyhuang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="studyhuang1996">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="welcome to studyhuang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">redis mybatis在spring boot中的使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T11:51:00+08:00">
+                2018-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring-boot/" itemprop="url" rel="index">
+                    <span itemprop="name">spring boot</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/08/1/" class="leancloud_visitors" data-flag-title="redis mybatis在spring boot中的使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="redis在spring-boot中的使用总结"><a href="#redis在spring-boot中的使用总结" class="headerlink" title="redis在spring boot中的使用总结"></a>redis在spring boot中的使用总结</h4><ul>
+<li>在pom.xml中引入redis依赖</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  &lt;dependency&gt;</div><div class="line">	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</div><div class="line">	&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>在application.properties中配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"># Redis数据库索引（默认为0）</div><div class="line">spring.redis.database=0  </div><div class="line"># Redis服务器地址</div><div class="line">spring.redis.host=127.0.0.1</div><div class="line"># Redis服务器连接端口</div><div class="line">spring.redis.port=6379  </div><div class="line"># Redis服务器连接密码（默认为空）</div><div class="line">spring.redis.password=</div><div class="line"># 连接池最大连接数（使用负值表示没有限制）</div><div class="line">spring.redis.pool.max-active=8  </div><div class="line"># 连接池最大阻塞等待时间（使用负值表示没有限制）</div><div class="line">spring.redis.pool.max-wait=-1  </div><div class="line"># 连接池中的最大空闲连接</div><div class="line">spring.redis.pool.max-idle=8  </div><div class="line"># 连接池中的最小空闲连接</div><div class="line">spring.redis.pool.min-idle=0  </div><div class="line"># 连接超时时间（毫秒）</div><div class="line">spring.redis.timeout=0</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加缓存配置类</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">@EnableCaching</div><div class="line">@Slf4j</div><div class="line">public class RedisConfig&lt;T&gt;  extends CachingConfigurerSupport&#123;</div><div class="line"></div><div class="line">   //自定义生成的键</div><div class="line">    @Bean</div><div class="line">    public KeyGenerator keyGenerator() &#123;</div><div class="line">       return new KeyGenerator()&#123;</div><div class="line">            @Override</div><div class="line">            public Object generate(Object o, Method method, Object... objects) &#123;</div><div class="line">                StringBuilder sb = new StringBuilder();</div><div class="line">                sb.append(o.getClass().getName());</div><div class="line">                sb.append(method.getName());</div><div class="line">                for (Object obj : objects)&#123;</div><div class="line">                    sb.append(obj.toString());</div><div class="line">                &#125;</div><div class="line">                log.info(&quot;缓存的键:&quot;+sb.toString());</div><div class="line">                return sb.toString();</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public CacheManager cacheManager(@SuppressWarnings(&quot;rawtypes&quot;)RedisTemplate redisTemplate)&#123;</div><div class="line">      RedisCacheManager rcm = new RedisCacheManager(redisTemplate);</div><div class="line">       rcm.setDefaultExpiration(60);//过期时间</div><div class="line">        return rcm;</div><div class="line">    &#125;</div><div class="line">    @Bean</div><div class="line">    public RedisTemplate&lt;String,String&gt; redisTemplate(RedisConnectionFactory factory)&#123;</div><div class="line">        StringRedisTemplate template = new StringRedisTemplate(factory);</div><div class="line">        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);</div><div class="line">        ObjectMapper objectMapper = new ObjectMapper();</div><div class="line">        objectMapper.setVisibility(PropertyAccessor.ALL,                    JsonAutoDetect.Visibility.ANY);</div><div class="line">        objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</div><div class="line">        jackson2JsonRedisSerializer.setObjectMapper(objectMapper);</div><div class="line">        template.setValueSerializer(jackson2JsonRedisSerializer);</div><div class="line">        template.afterPropertiesSet();</div><div class="line">        return template;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">        public RedisTemplate&lt;String,T&gt; redisTemplates(RedisConnectionFactory factory)      &#123;</div><div class="line">           RedisTemplate&lt;String,T&gt; redisTemplate = new RedisTemplate&lt;String, T&gt;();</div><div class="line">           redisTemplate.setConnectionFactory(factory);</div><div class="line">           redisTemplate.setKeySerializer(new StringRedisSerializer());</div><div class="line">         //  redisTemplate.setValueSerializer(new RedisObje);</div><div class="line">            return redisTemplate;</div><div class="line">        &#125;&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>测试</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">@RunWith(SpringRunner.class)</div><div class="line">@SpringBootTest</div><div class="line">@Component</div><div class="line">public class TestRedis &#123;</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private StringRedisTemplate stringRedisTemplate;</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private RedisTemplate redisTemplate;</div><div class="line"></div><div class="line">    @Test</div><div class="line">    public void test()&#123;</div><div class="line">      stringRedisTemplate.opsForValue().set(&quot;name&quot;,&quot;111&quot;);</div><div class="line">        Assert.assertEquals(&quot;111&quot;,stringRedisTemplate.opsForValue().get(&quot;name&quot;));</div><div class="line">        System.out.println(redisTemplate.opsForValue().get(&quot;name&quot;));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="mybatis在spring-boot中的使用"><a href="#mybatis在spring-boot中的使用" class="headerlink" title="mybatis在spring boot中的使用"></a>mybatis在spring boot中的使用</h4><ul>
+<li><p>引入依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</div><div class="line">  	&lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</div><div class="line">	&lt;version&gt;1.3.2&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置application.properties</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mybatis.type-aliases-package=com.example.bootdemo.pojo.entity //实体类的包</div><div class="line">mybatis.mapper-locations=classpath:mapper/*.xml  //mapper文件的位置</div></pre></td></tr></table></figure>
+</li>
+<li><p>dao层代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@Mapper</div><div class="line">public interface CityMapper  &#123;</div><div class="line"></div><div class="line">    List&lt;City&gt; findCitys();</div><div class="line"></div><div class="line">    City findOne(Long id);</div><div class="line"></div><div class="line">    City findByName(String cityName );</div><div class="line"></div><div class="line">    void insert(City city);</div><div class="line"></div><div class="line">    void update(City city);</div><div class="line"></div><div class="line">    void delete(Long id);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>service层代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line">public interface CityService &#123;</div><div class="line"></div><div class="line">    List&lt;City&gt; findCitys();</div><div class="line"></div><div class="line">    City findOne(Long id);</div><div class="line"></div><div class="line">    City findByName(String cityName );</div><div class="line"></div><div class="line">    void insert(City city);</div><div class="line"></div><div class="line">    void update(City city);</div><div class="line"></div><div class="line">    void delete(Long id);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">@Service</div><div class="line">@Slf4j</div><div class="line">public class CityServiceImpl implements CityService &#123;</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private CityMapper cityMapper;</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private RedisTemplate redisTemplate;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    @Cacheable(value = &quot;city&quot;)</div><div class="line">    public List&lt;City&gt; findCitys() &#123;</div><div class="line">    </div><div class="line">        return cityMapper.findCitys();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">   // @Cacheable(value = &quot;cityInfo&quot;)</div><div class="line">    public City findOne(Long id)</div><div class="line">    &#123;</div><div class="line">        String key = &quot;city_&quot;+id;</div><div class="line">        ValueOperations&lt;String,City&gt; operations = redisTemplate.opsForValue();</div><div class="line"></div><div class="line">        boolean hasKey = redisTemplate.hasKey(key);</div><div class="line">        if (hasKey)&#123;</div><div class="line">            //重缓存中获取</div><div class="line">            //重缓存中获取</div><div class="line">            City city = operations.get(key);</div><div class="line">            log.info(&quot;缓存获取&quot;,city.toString());</div><div class="line">            return city;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        //从数据库中查询</div><div class="line">        City city = cityMapper.findOne(id);</div><div class="line">        operations.set(key,city);</div><div class="line">        log.info(&quot;插入缓存&quot;,city.toString());</div><div class="line">        return city;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    @Cacheable(value = &quot;cityInfo&quot;)</div><div class="line">    public City findByName(String cityName) &#123;</div><div class="line">        return cityMapper.findByName(cityName);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void insert(City city) &#123;</div><div class="line">      cityMapper.insert(city);</div><div class="line">      redisTemplate.opsForValue().set(Const.PREFIX+city.getId(),city);</div><div class="line">      log.info(&quot;添加缓存&quot;+city);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void update(City city) &#123;</div><div class="line"></div><div class="line">        cityMapper.update(city);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void delete(Long id) &#123;</div><div class="line">      if (redisTemplate.hasKey(Const.PREFIX+id))&#123;</div><div class="line">            redisTemplate.delete(Const.PREFIX+id);</div><div class="line">            log.info(&quot;删除缓存&quot;);</div><div class="line">      &#125;</div><div class="line">      cityMapper.delete(id);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>web层代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">@RestController</div><div class="line">@RequestMapping(&quot;city&quot;)</div><div class="line">public class CityController &#123;</div><div class="line">    private static Logger logger = LoggerFactory.getLogger(CityController.class);</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private CityService cityService;</div><div class="line"></div><div class="line">    @GetMapping(&quot;list&quot;)</div><div class="line">    public List&lt;City&gt; findAll()&#123;</div><div class="line">        return cityService.findCitys();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @GetMapping(&quot;findCity/&#123;id&#125;&quot;)</div><div class="line">    public City findCityById(@PathVariable Long id)&#123;</div><div class="line"></div><div class="line">        return cityService.findOne(id);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @GetMapping(&quot;findName/&#123;cityName&#125;&quot;)</div><div class="line">    public City findCityByName(@PathVariable String cityName)&#123;</div><div class="line"></div><div class="line">        return cityService.findByName(cityName);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @PostMapping(&quot;save&quot;)</div><div class="line">    public String saveCity(City city, BindingResult result)&#123;</div><div class="line">        cityService.insert(city);</div><div class="line">        logger.info(&quot;保存成功&quot;);</div><div class="line">        return &quot;SUCCESS&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @PutMapping(&quot;update&quot;)</div><div class="line">    public String updateCity(City city, BindingResult result)&#123;</div><div class="line">        cityService.update(city);</div><div class="line">        logger.info(&quot;保存成功&quot;);</div><div class="line">        return &quot;SUCCESS&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @RequestMapping(&quot;/login&quot;)</div><div class="line">    public String login(HttpServletRequest req)&#123;</div><div class="line">        String sessionId = req.getSession().getId();</div><div class="line">        logger.info(&quot;sessionId=&quot;+sessionId);</div><div class="line">        return sessionId;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在resource目录下配置*mapper.xml文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;!--</div><div class="line">  ~ @(#) CityMapper.xml</div><div class="line">  ~ &lt;br&gt; @author huang</div><div class="line">  ~ &lt;br&gt; 2018-05-07 17:06:42</div><div class="line">  --&gt;</div><div class="line">&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot; &gt;</div><div class="line">&lt;mapper namespace=&quot;com.example.bootdemo.dao.mybatis.CityMapper&quot;&gt;</div><div class="line">    &lt;resultMap id=&quot;BaseResultMap&quot; type=&quot;com.example.bootdemo.pojo.entity.City&quot;&gt;</div><div class="line">        &lt;result column=&quot;id&quot; property=&quot;id&quot; /&gt;</div><div class="line">        &lt;result column=&quot;province_id&quot; property=&quot;provinceId&quot; /&gt;</div><div class="line">        &lt;result column=&quot;city_name&quot; property=&quot;cityName&quot; /&gt;</div><div class="line">        &lt;result column=&quot;description&quot; property=&quot;description&quot; /&gt;</div><div class="line">    &lt;/resultMap&gt;</div><div class="line"></div><div class="line">    &lt;parameterMap id=&quot;City&quot; type=&quot;com.example.bootdemo.pojo.entity.City&quot;/&gt;</div><div class="line"></div><div class="line">    &lt;sql id=&quot;Base_Column_List&quot;&gt;</div><div class="line">        id, province_id, city_name, description</div><div class="line">    &lt;/sql&gt;</div><div class="line"></div><div class="line">    &lt;select id=&quot;findByName&quot; resultMap=&quot;BaseResultMap&quot; parameterType=&quot;java.lang.String&quot;&gt;</div><div class="line">        select</div><div class="line">        &lt;include refid=&quot;Base_Column_List&quot; /&gt;</div><div class="line">        from city</div><div class="line">        where city_name = #&#123;cityName&#125;</div><div class="line">    &lt;/select&gt;</div><div class="line">    &lt;select id=&quot;findCitys&quot; resultMap=&quot;BaseResultMap&quot; &gt;</div><div class="line">       SELECT</div><div class="line">       &lt;include refid=&quot;Base_Column_List&quot;/&gt;</div><div class="line">        FROM  city</div><div class="line">    &lt;/select&gt;</div><div class="line">    </div><div class="line">    &lt;select id=&quot;findOne&quot; resultMap=&quot;BaseResultMap&quot; parameterType=&quot;long&quot;&gt;</div><div class="line">        SELECT</div><div class="line">        &lt;include refid=&quot;Base_Column_List&quot;/&gt;</div><div class="line">        FROM city</div><div class="line">        WHERE id = #&#123;id&#125;</div><div class="line">    &lt;/select&gt;</div><div class="line">    &lt;!--MyBatis 获取由数据库自动生成的主键；--&gt;</div><div class="line">    &lt;insert id=&quot;insert&quot; parameterMap=&quot;City&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;</div><div class="line">        INSERT INTO</div><div class="line">        city(id,province_id,city_name,description)</div><div class="line">        VALUES (#&#123;id&#125;,#&#123;provinceId&#125;,#&#123;cityName&#125;,#&#123;description&#125;)</div><div class="line">    &lt;/insert&gt;</div><div class="line">    &lt;update id=&quot;update&quot;&gt;</div><div class="line">       UPDATE city</div><div class="line">       SET</div><div class="line">       &lt;if test=&quot;provinceId != null&quot;&gt;</div><div class="line">           province_id = #&#123;provinceId&#125;</div><div class="line">       &lt;/if&gt;</div><div class="line">        &lt;if test=&quot;cityName != null&quot;&gt;</div><div class="line">            city_name = #&#123;cityName&#125;</div><div class="line">        &lt;/if&gt;</div><div class="line">        &lt;if test=&quot;description != null&quot;&gt;</div><div class="line">            province_id = #&#123;description&#125;</div><div class="line">        &lt;/if&gt;</div><div class="line">        where</div><div class="line">        id = #&#123;id&#125;</div><div class="line">    &lt;/update&gt;</div><div class="line"></div><div class="line">    &lt;delete id=&quot;delete&quot; parameterType=&quot;long&quot;&gt;</div><div class="line">        DELETE FROM</div><div class="line">        city</div><div class="line">        WHERE id = #&#123;id&#125;</div><div class="line">    &lt;/delete&gt;</div><div class="line">&lt;/mapper&gt;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/studyhuang1996/spring-boot-demo.git" target="_blank" rel="external">github地址</a></p>
+</li>
+</ul>
+
+      
+    </div>
+   
+    <div>
+      
+          <!-- JS�� sweetalert ���޸�·�� --><!--
+
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>���ı���:</span><a href="/2018/05/08/1/">redis mybatis在spring boot中的使用</a></p>
+  <p><span>��������:</span><a href="/" title="���� studyhuang1996 �ĸ��˲���">studyhuang1996</a></p>
+  <p><span>����ʱ��:</span>2018��05��08�� - 11:05</p>
+  <p><span>��������:</span>2018��05��08�� - 14:05</p>
+  <p><span>ԭʼ����:</span><a href="/2018/05/08/1/" title="redis mybatis在spring boot中的使用">http://yoursite.com/2018/05/08/1/</a>
+    <span class="copy-path"  title="����������������"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2018/05/08/1/"  aria-label="���Ƴɹ���"></i></span>
+  </p>
+  <p><span>����Э��:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">����-����ҵ��ʹ��-��ֹ���� 4.0 ����</a> ת���뱣��ԭ�����Ӽ����ߡ�</p>  
+</div>-->
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '���Ƴɹ�',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+
+      
+    </div>
+
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring-boot-redis-mybatis/" rel="tag"># spring boot redis mybatis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/07/boot/" rel="next" title="boot">
+                <i class="fa fa-chevron-left"></i> boot
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo.jpg"
+               alt="studyhuang1996" />
+          <p class="site-author-name" itemprop="name">studyhuang1996</p>
+           
+              <p class="site-description motion-element" itemprop="description">没故事的女同学</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#redis在spring-boot中的使用总结"><span class="nav-number">1.</span> <span class="nav-text">redis在spring boot中的使用总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mybatis在spring-boot中的使用"><span class="nav-number">2.</span> <span class="nav-text">mybatis在spring boot中的使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">studyhuang1996</span>
+</div>
+
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("A98KoG9KM3z6PLcYUC4Wahs4-gzGzoHsz", "usBzz6AXb6uWJhmowq8gDUPD");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
