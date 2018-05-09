@@ -106,7 +106,7 @@
 <meta name="description" content="没故事的女同学">
 <meta property="og:type" content="website">
 <meta property="og:title" content="welcome to studyhuang">
-<meta property="og:url" content="http://yoursite.com/categories/python/index.html">
+<meta property="og:url" content="http://yoursite.com/categories/Python/index.html">
 <meta property="og:site_name" content="welcome to studyhuang">
 <meta property="og:description" content="没故事的女同学">
 <meta name="twitter:card" content="summary">
@@ -139,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/python/"/>
+  <link rel="canonical" href="http://yoursite.com/categories/Python/"/>
 
 
 
 
 
-  <title>分类: python | welcome to studyhuang</title>
+  <title>分类: Python | welcome to studyhuang</title>
   
 
 
@@ -266,7 +266,7 @@
 
   <section id="posts" class="posts-collapse">
     <div class="collection-title">
-      <h1>python<small>分类</small>
+      <h1>Python<small>分类</small>
       </h1>
     </div>
 
@@ -278,9 +278,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2017/08/14/1/" itemprop="url">
+            <a class="post-title-link" href="/2017/08/15/1/" itemprop="url">
               
-                <span itemprop="name">Python学习笔记(三)</span>
+                <span itemprop="name">python学习笔记（四）</span>
               
             </a>
         
@@ -288,9 +288,65 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-14T15:45:21+08:00"
-              content="2017-08-14" >
-          08-14
+              datetime="2017-08-15T17:29:36+08:00"
+              content="2017-08-15" >
+          08-15
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2017/08/12/1/" itemprop="url">
+              
+                <span itemprop="name">Python学习笔记（二）</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-08-12T22:08:17+08:00"
+              content="2017-08-12" >
+          08-12
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2017/08/01/1/" itemprop="url">
+              
+                <span itemprop="name">Python学习笔记（一）</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-08-01T11:15:36+08:00"
+              content="2017-08-01" >
+          08-01
         </time>
       </div>
 
@@ -345,7 +401,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -632,61 +688,6 @@
               },
               error: function(counter, error) {
                 console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
-essage: ' + error.message);
               }
             });
           } else {
