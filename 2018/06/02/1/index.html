@@ -103,19 +103,19 @@
 
 
 
-<meta name="description" content="React中的状态提升，渲染列表数据。 ####1.渲染列表数据  在开发过程中总是有很多列表的展示功能，前端总是需要去页面上渲染，在页面上显示列表。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566">
+<meta name="description" content="本章主要记录下React中的状态提升，渲染列表数据。 1.渲染列表数据   在开发过程中总是有很多列表的展示功能，前端总是需要去页面上渲染，在页面上显示列表。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646">
 <meta name="keywords" content="React">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React学习(二)">
 <meta property="og:url" content="https://github.com/studyhuang1996/2018/06/02/1/index.html">
 <meta property="og:site_name" content="studyhuang1996">
-<meta property="og:description" content="React中的状态提升，渲染列表数据。 ####1.渲染列表数据  在开发过程中总是有很多列表的展示功能，前端总是需要去页面上渲染，在页面上显示列表。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566">
+<meta property="og:description" content="本章主要记录下React中的状态提升，渲染列表数据。 1.渲染列表数据   在开发过程中总是有很多列表的展示功能，前端总是需要去页面上渲染，在页面上显示列表。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646">
 <meta property="og:image" content="http://img.studyhuang.cn/state.jpg">
 <meta property="og:image" content="http://img.studyhuang.cn/doller.jpg">
-<meta property="og:updated_time" content="2018-06-02T09:23:43.251Z">
+<meta property="og:updated_time" content="2018-06-02T14:03:53.580Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React学习(二)">
-<meta name="twitter:description" content="React中的状态提升，渲染列表数据。 ####1.渲染列表数据  在开发过程中总是有很多列表的展示功能，前端总是需要去页面上渲染，在页面上显示列表。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566">
+<meta name="twitter:description" content="本章主要记录下React中的状态提升，渲染列表数据。 1.渲染列表数据   在开发过程中总是有很多列表的展示功能，前端总是需要去页面上渲染，在页面上显示列表。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646">
 <meta name="twitter:image" content="http://img.studyhuang.cn/state.jpg">
 
 
@@ -376,11 +376,13 @@
       
 
       
-        <p> React中的状态提升，渲染列表数据。</p>
-<p>####1.渲染列表数据</p>
+        <pre><code>本章主要记录下React中的状态提升，渲染列表数据。
+</code></pre><h4>1.渲染列表数据</h4>
+
 <p> 在开发过程中总是有很多列表的展示功能，前端总是需要去页面上渲染，在页面上显示列表。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">1.用map遍历</div><div class="line">this.state.list:[]数组</div><div class="line">&#123;this.state.list.map((category, index) =&gt; &#123;</div><div class="line">       return (</div><div class="line">       //表达式套数组罗列到页面上的元素，都要为每个元素加上 key 属性，key 必须是每个元素唯一的标识</div><div class="line">       &lt;tr key=&#123;index&#125;&gt;</div><div class="line">        	&lt;td className=&quot;text-center&quot;&gt;&#123;category.cid&#125;&lt;/td&gt;</div><div class="line">       		&lt;td className=&quot;text-center&quot;&gt;&#123;category.cname&#125;&lt;/td&gt;</div><div class="line">       		&lt;td className=&quot;text-center&quot;&gt;&lt;img src=&#123;category.cpic&#125; width=&quot;70&quot; height=&quot;70&quot;/&gt;&lt;/td&gt;</div><div class="line">        &lt;/tr&gt;</div><div class="line">        );</div><div class="line"> &#125;)&#125;</div><div class="line"> </div><div class="line">=======================================================================</div><div class="line"> const users = [</div><div class="line">  &#123;id: 1, username: &apos;he&apos;, age: 21 &#125;,</div><div class="line">  &#123;id:2, username: &apos;huang&apos;, age: 18&#125;</div><div class="line"></div><div class="line">]</div><div class="line"> class User extends Component &#123;</div><div class="line">  render () &#123;</div><div class="line">    const &#123; user &#125; = this.props</div><div class="line">    return (</div><div class="line">      &lt;div key=&#123;user.id&#125;&gt;</div><div class="line">        &lt;div&gt;姓名：&#123;user.username&#125;&lt;/div&gt;</div><div class="line">        &lt;div&gt;年龄：&#123;user.age&#125;&lt;/div&gt;</div><div class="line">        &lt;hr /&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Index extends Component &#123;</div><div class="line">  render () &#123;</div><div class="line">    return (</div><div class="line">      &lt;div&gt;</div><div class="line">        &#123;users.map((user) =&gt; &lt;User user=&#123;user&#125; /&gt;)&#125;</div><div class="line">      &lt;/div&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  &lt;Index /&gt;,</div><div class="line">  document.getElementById(&apos;root&apos;)</div><div class="line">)</div><div class="line"></div><div class="line">=============================================================================</div><div class="line">class Index extends Component &#123;</div><div class="line">  render () &#123;</div><div class="line">    const usersElements = [] // 保存每个用户渲染以后 JSX 的数组</div><div class="line">    for (let user of users) &#123;</div><div class="line">      usersElements.push( // 循环每个用户，构建 JSX，push 到数组中</div><div class="line">        &lt;div&gt;</div><div class="line">          &lt;div&gt;姓名：&#123;user.username&#125;&lt;/div&gt;</div><div class="line">          &lt;div&gt;年龄：&#123;user.age&#125;&lt;/div&gt;</div><div class="line">          &lt;hr /&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">      )</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return (</div><div class="line">      &lt;div&gt;&#123;usersElements&#125;&lt;/div&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>####2.状态提升</p>
+<h4>2.状态提升</h4>
+
 <p><img src="http://img.studyhuang.cn/state.jpg" alt="状态提升"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">同一个数据的变化需要几个不同的组件来反映。</div><div class="line">提升共享的状态到它们最近的祖先组件中</div><div class="line"></div><div class="line">用户对子组件操作，子组件不改变自己的状态，通过自己的props把</div><div class="line">这个操作改变的数据传递给父组件，改变父组件的状态，</div><div class="line">从而改变受父组件控制的所有子组件的状态，这也是React单项数据流的特性</div></pre></td></tr></table></figure>
 <p><img src="http://img.studyhuang.cn/doller.jpg" alt="人民币与美元的换算"></p>
@@ -402,7 +404,7 @@
   <p><span>���ı���:</span><a href="/2018/06/02/1/">React学习(二)</a></p>
   <p><span>��������:</span><a href="/" title="���� 笔记屋 �ĸ��˲���">笔记屋</a></p>
   <p><span>����ʱ��:</span>2018��06��02�� - 16:06</p>
-  <p><span>������:</span>2018��06��02�� - 17:06</p>
+  <p><span>������:</span>2018��06��02�� - 22:06</p>
   <p><span>ԭʼ����:</span><a href="/2018/06/02/1/" title="React学习(二)">https://github.com/studyhuang1996/2018/06/02/1/</a>
     <span class="copy-path"  title="���������������"><i class="fa fa-clipboard" data-clipboard-text="https://github.com/studyhuang1996/2018/06/02/1/"  aria-label="���Ƴɹ���"></i></span>
   </p>
@@ -603,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-未完待续"><span class="nav-number">1.</span> <span class="nav-text">3.未完待续</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">1.渲染列表数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">2.状态提升</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-未完待续"><span class="nav-number">2.1.</span> <span class="nav-text">3.未完待续</span></a></li></ol></li></ol></div>
             
 
           </div>
