@@ -109,7 +109,7 @@
 <meta property="og:url" content="https://github.com/studyhuang1996/2018/04/26/Redis入门/index.html">
 <meta property="og:site_name" content="笔记屋">
 <meta property="og:description" content="一，简介  Redis是一个速度非常快的非关系数据库（non-relational database），它可以存储键（key）与5种不同类型的值（value）之间的映射（mapping），可以将存储在内存的键值对数据持久化到硬盘，可以使用复制特性来扩展读性能，还可以使用客户端分片(http://redisinaction.com/preview/chapter1.html#f1)来扩展写性能 如何">
-<meta property="og:updated_time" content="2018-04-27T10:04:07.000Z">
+<meta property="og:updated_time" content="2018-06-24T15:01:45.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis入门">
 <meta name="twitter:description" content="一，简介  Redis是一个速度非常快的非关系数据库（non-relational database），它可以存储键（key）与5种不同类型的值（value）之间的映射（mapping），可以将存储在内存的键值对数据持久化到硬盘，可以使用复制特性来扩展读性能，还可以使用客户端分片(http://redisinaction.com/preview/chapter1.html#f1)来扩展写性能 如何">
@@ -362,6 +362,301 @@
 <li>高可用，分布式</li>
 <li>简单 功能丰富</li>
 </ul>
+<p>###二 redis的五种数据结构</p>
+<h4 id="2-1-字符串（string）"><a href="#2-1-字符串（string）" class="headerlink" title="2.1 字符串（string）"></a>2.1 字符串（string）</h4><p>字符串可以存储的类型由 字符串，数值和浮点数</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">set key value  EX seconds     PX milliseconds   [NX\</th>
+<th style="text-align:center">XX]</th>
+<th>设置key的值 ,ex是过期时间秒，px是毫秒</th>
+<th>set name ‘huang’ EX 30</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">get key</td>
+<td style="text-align:center">获取key的值</td>
+<td>get name</td>
+</tr>
+<tr>
+<td style="text-align:center">del key [key …]</td>
+<td style="text-align:center">删除key，成功返回1，失败返回0</td>
+<td>del name</td>
+</tr>
+<tr>
+<td style="text-align:center">incr key</td>
+<td style="text-align:center">自增1</td>
+<td>incr name</td>
+</tr>
+<tr>
+<td style="text-align:center">decr key</td>
+<td style="text-align:center">自减1</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">incrby key increment</td>
+<td style="text-align:center">给key加上increment</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">incrbyfloat key increment</td>
+<td style="text-align:center">给key加上increment</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">append key value</td>
+<td style="text-align:center">在原来值 的末尾追加value，返回字符串的长度</td>
+<td>append name 123</td>
+</tr>
+<tr>
+<td style="text-align:center">getrange key start end</td>
+<td style="text-align:center">获取从start到end范围内的子串包括start和end ，返回字符串的长度</td>
+<td>getrange name 0 5</td>
+</tr>
+<tr>
+<td style="text-align:center">setrange key offset value</td>
+<td style="text-align:center">把offset位置的值替换成value，返回字符串的长度</td>
+<td>setrange name 0 H</td>
+</tr>
+</tbody>
+</table>
+<p>####2.2 列表（list）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">rpush key value [value …]</th>
+<th>将一个或多个值推入列表的右边</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">lpush key value [value …]</td>
+<td>将一个或多个值推入列表的左边</td>
+</tr>
+<tr>
+<td style="text-align:center">lpop key</td>
+<td>移除并返回列表最左端的元素</td>
+</tr>
+<tr>
+<td style="text-align:center">lindex key index</td>
+<td>返回第index位置的元素</td>
+</tr>
+<tr>
+<td style="text-align:center">lrange key start stop</td>
+<td>返回start到stop范围的所有元素，包含自己</td>
+</tr>
+<tr>
+<td style="text-align:center">ltrim key start stop</td>
+<td>裁剪列表，保留从start到stop的元素</td>
+</tr>
+<tr>
+<td style="text-align:center">rpoplpush source destination</td>
+<td>弹出source最右端的元素，推入到destination最左端，并返回该元素</td>
+</tr>
+<tr>
+<td style="text-align:center">brpoplpush source destination timeout</td>
+<td>弹出source最右端的元素，推入到destination最左端，并返回该元素,如source为空，在timeout之内阻塞等待可弹出的元素出现</td>
+</tr>
+<tr>
+<td style="text-align:center">brpop key [key …] timeout</td>
+<td>从第一个非空列表弹出最左端的元素，或者在timeout之内阻塞等待可弹出的元素出现</td>
+</tr>
+<tr>
+<td style="text-align:center">BRPOP</td>
+</tr>
+</tbody>
+</table>
+<p>将偶</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">//从右边向key为list的集合存入item1</div><div class="line">127.0.0.1:6379&gt; rpush list item1</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; rpush list item2 //从右边向key为list的集合存入item2</div><div class="line">(integer) 2</div><div class="line">127.0.0.1:6379&gt; lpush list item3 //从左边向key为list的集合存入item3</div><div class="line">(integer) 3</div><div class="line">127.0.0.1:6379&gt; lrange list 0 -1  //获取列表中从0到-1的所有元素</div><div class="line">1) &quot;item3&quot;</div><div class="line">2) &quot;item1&quot;</div><div class="line">3) &quot;item2&quot;</div><div class="line">127.0.0.1:6379&gt; lpop list //从key为list的集合中左边弹出</div><div class="line">&quot;item3&quot;</div><div class="line">127.0.0.1:6379&gt; lindex list 0 //获取list中第0位的元素</div><div class="line">&quot;item1&quot;</div><div class="line">127.0.0.1:6379&gt; ltrim list 0 1 //</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; lrange list 0 -1</div><div class="line">1) &quot;item1&quot;</div><div class="line">2) &quot;item2&quot;</div><div class="line">127.0.0.1:6379&gt; lpush list item5</div><div class="line">(integer) 3</div><div class="line">127.0.0.1:6379&gt; ltrim list 0 1 //对列表修剪，保留0到1范围的元素，包括0和1</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; lrange list 0 -1 //只剩下第0个元素和第1个</div><div class="line">1) &quot;item5&quot;</div><div class="line">2) &quot;item1&quot;</div><div class="line">//rpoplpush</div><div class="line">127.0.0.1:6379&gt; rpoplpush  list list2</div><div class="line">&quot;item1&quot;</div><div class="line">127.0.0.1:6379&gt; lrange list 0 -1</div><div class="line">1) &quot;item5&quot;</div><div class="line">127.0.0.1:6379&gt; lrange list2 0 -1</div><div class="line">1) &quot;item1&quot;</div><div class="line">2) &quot;itemlist2&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
+<h4 id="2-3-集合（set）"><a href="#2-3-集合（set）" class="headerlink" title="2.3 集合（set）"></a>2.3 集合（set）</h4><table>
+<thead>
+<tr>
+<th>sadd key member [member …]</th>
+<th>向集合添加一个或多个成员</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>srem key member [member …]</td>
+<td>移除</td>
+</tr>
+<tr>
+<td>sismember key member</td>
+<td>是否存在此成员</td>
+</tr>
+<tr>
+<td>srandmember</td>
+<td>集合中随机选出元素</td>
+</tr>
+<tr>
+<td>scard key</td>
+<td>获取集合的成员数</td>
+</tr>
+<tr>
+<td>smembers key</td>
+<td>获取集合的所有元素</td>
+</tr>
+<tr>
+<td>spop key [count]</td>
+<td>随机移除元素，count&gt;=1时，移除元素不重复</td>
+</tr>
+<tr>
+<td>smove source destination member</td>
+<td>随机移除元素 ，并返回移除元素</td>
+</tr>
+<tr>
+<td>sdiff key [key …]</td>
+<td>差集</td>
+</tr>
+<tr>
+<td>sinter key [key …]</td>
+<td>交集</td>
+</tr>
+<tr>
+<td>sunion key [key …]</td>
+<td>并集</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-4-散列-hash-键值对存储"><a href="#2-4-散列-hash-键值对存储" class="headerlink" title="2.4 散列(hash)键值对存储"></a>2.4 散列(hash)键值对存储</h4><table>
+<thead>
+<tr>
+<th>hmset key field value [field value …]</th>
+<th>设置散列中key的值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hmget key field [field …]</td>
+<td>从散列中获取一个或者多个值</td>
+</tr>
+<tr>
+<td>hdel key field [field …]</td>
+<td>删除值</td>
+</tr>
+<tr>
+<td>hlen key</td>
+<td>返回列表中键值对数量</td>
+</tr>
+<tr>
+<td>hexists key field</td>
+<td>给定键中是否存在在散列里</td>
+</tr>
+<tr>
+<td>hkeys key</td>
+<td>获取散列包含所有的键</td>
+</tr>
+<tr>
+<td>hvals key</td>
+<td>获取所有值</td>
+</tr>
+<tr>
+<td>hgetall key</td>
+<td>获取所有键值对</td>
+</tr>
+<tr>
+<td>hincrby key field increment</td>
+<td>将key存储的值加上increment</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-5-有序集合-zset"><a href="#2-5-有序集合-zset" class="headerlink" title="2.5 有序集合(zset)"></a>2.5 有序集合(zset)</h4><table>
+<thead>
+<tr>
+<th>zadd key [NX\</th>
+<th>XX][CH] [INCR] score member [score member …</th>
+<th>将带有给定分值的成员添加到有序集合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zrem key member [member …]</td>
+<td>移除给定的成员，返回被移除的成员变量</td>
+</tr>
+<tr>
+<td>zcard key</td>
+<td>返回有序集合包含的成员数量</td>
+</tr>
+<tr>
+<td>zincrby key increment member</td>
+<td>给成员加increment分</td>
+</tr>
+<tr>
+<td>zcount key min max</td>
+<td>返回分值在min到max之间成员数量</td>
+</tr>
+<tr>
+<td>zrank key member</td>
+<td>返回member的排名</td>
+</tr>
+<tr>
+<td>zscore key member</td>
+<td>返回member的分值</td>
+</tr>
+<tr>
+<td>zrange key start stop [WITHSCORES]</td>
+<td>返回排名在start到stop之间的成员</td>
+</tr>
+<tr>
+<td>zrevrange key start stop [WITHSCORES]</td>
+<td>返回排名。。。分值从大到小</td>
+</tr>
+<tr>
+<td>zrevrangebyscore key max min [WITHSCORES][LIMIT offset count]</td>
+<td>返回分值在min和max之间的所有成员，从大到小</td>
+</tr>
+<tr>
+<td>zremrangebyscore key min max</td>
+<td>移除</td>
+</tr>
+<tr>
+<td>zinterstore destination numkeys key [key …][WEIGHTS weight] [AGGREGATE SUM\</td>
+<td>MIN\</td>
+<td>MAX]</td>
+<td>交集，相同的分值相加</td>
+</tr>
+<tr>
+<td>zunionstore destination numkeys key   key …  WEIGHTS weight  [AGGREGATE SUM\</td>
+<td>MIN\</td>
+<td>MAX]</td>
+<td>并集，相同的，分值起小的那个</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-6发布与订阅"><a href="#2-6发布与订阅" class="headerlink" title="2.6发布与订阅"></a>2.6发布与订阅</h4><table>
+<thead>
+<tr>
+<th>subscribe channel [channel …]</th>
+<th>订阅一个或多个频道</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unsubscribe [channel [channel …]]</td>
+<td>退订</td>
+</tr>
+<tr>
+<td>publish channel message</td>
+<td>向频道发送信息</td>
+</tr>
+<tr>
+<td>psubscribe pattern [pattern …]</td>
+<td>订阅匹配的所有频道</td>
+</tr>
+<tr>
+<td>punsubscribe [pattern [pattern …]]</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-7-排序（sort）"><a href="#2-7-排序（sort）" class="headerlink" title="2.7 排序（sort）"></a>2.7 排序（sort）</h4><h4 id="2-8事务"><a href="#2-8事务" class="headerlink" title="2.8事务"></a>2.8事务</h4><p>用户不被打断情况对多个键执行操作</p>
+<p>先用<strong>MULT</strong> 命令，然后要执行的多个命令放到队列中，到<strong>EXEC命令执行</strong></p>
 
       
     </div>
@@ -548,7 +843,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一，简介"><span class="nav-number">1.</span> <span class="nav-text">一，简介</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一，简介"><span class="nav-number">1.</span> <span class="nav-text">一，简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-字符串（string）"><span class="nav-number">2.</span> <span class="nav-text">2.1 字符串（string）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-集合（set）"><span class="nav-number">3.</span> <span class="nav-text">2.3 集合（set）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-散列-hash-键值对存储"><span class="nav-number">4.</span> <span class="nav-text">2.4 散列(hash)键值对存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-有序集合-zset"><span class="nav-number">5.</span> <span class="nav-text">2.5 有序集合(zset)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6发布与订阅"><span class="nav-number">6.</span> <span class="nav-text">2.6发布与订阅</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7-排序（sort）"><span class="nav-number">7.</span> <span class="nav-text">2.7 排序（sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8事务"><span class="nav-number">8.</span> <span class="nav-text">2.8事务</span></a></li></ol></div>
             
 
           </div>
